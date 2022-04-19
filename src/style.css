@@ -1,0 +1,113 @@
+body {
+  background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.container {
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  border: 6px solid #0c9463;
+  border-radius: 15px;
+  padding: 30px 50px;
+  width: 900px;
+  margin: 90px auto;
+  background-color: #0c9463;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+h1 {
+  color: #fda403;
+  position: relative;
+  left: 30px;
+  top: 30px;
+  font-size: 5rem;
+}
+h2 {
+  color: white;
+
+  font-size: 60px;
+}
+.col {
+  color: white;
+  font-weight: bolder;
+  margin: 0 auto;
+  display: block;
+}
+ul {
+  list-style: none;
+}
+.description {
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+
+  font-size: 25px;
+  font-family: "Raleway", sans-serif;
+}
+
+.city {
+  color: green;
+}
+
+input {
+  border-radius: 20px;
+  border: solid;
+  padding: 5px;
+  margin: 10px 5px;
+  width: 70%;
+  color: #fda403;
+  font-weight: 700;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+button {
+  border-radius: 20px;
+  border: solid;
+  padding: 5px;
+  padding: 5px;
+  width: 120px;
+  color: white;
+  background: #fda403;
+  font-weight: 800;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cloud-icon,
+.lightning-icon,
+.cloud-icontwo,
+.sunicon,
+.fa-cloud-bolt,
+.fa-cloud {
+  color: #fda403;
+  font-size: 40px;
+}
+
+div {
+  display: block;
+  margin: 0 auto;
+}
+
+.moon-icon {
+  color: #fda403;
+  font-size: 40px;
+}
+.temp {
+  padding-left: 30px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.info {
+  position: relative;
+  width: 30%;
+  padding: 30px;
+}
+
+ul {
+  width: 70%;
+  padding: 10px;
+}
+
+.footer {
+  text-align: center;
+  display: block;
+}
