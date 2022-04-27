@@ -23,17 +23,48 @@ function formatDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 //homework 5
+let apiKey = "2df674138d044db88c1ab34f314bc364";
+
+function displayFutureWeatherCondition(response) {
+  console.log(response.data);
+  document.querySelector("#days").innerHTML = `
+        <div class="col day">${response.data.list[3].dt_txt}</div>
+        <div class="col day">${response.data.list[11].dt_txt}</div>
+        <div class="col day">${response.data.list[19].dt_txt}</div>
+        <div class="col day">${response.data.list[27].dt_txt}</div>
+        <div class="col day">${response.data.list[35].dt_txt}</div>
+  `;
+  document.querySelector("#temperatures").innerHTML = `
+        <div class="col temperature">${response.data.list[3].main.temp_max}K/${response.data.list[3].main.temp_min}K</div>
+        <div class="col temperature">9°C / 1°C</div>
+        <div class="col temperature">10°C / 3°C</div>
+        <div class="col temperature">13°C / 3°C</div>
+        <div class="col temperature">15°C / 7°C</div>
+        <div class="col temperature">11°C / 8°C</div>
+  `;
+}
+
 function displayWeatherCondition(response) {
   document.querySelector("#city-element").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML = Math.round(
+  document.querySelector("#temperature").innerHTML = `${Math.round(
     response.data.main.temp
-  );
+  )}°C`;
 
   document.querySelector("#city-element").innerHTML = response.data.name;
+  document.querySelector(
+    "#humidity"
+  ).innerHTML = `Humidity: ${response.data.main.humidity}%`;
+  document.querySelector(
+    "#wind"
+  ).innerHTML = `Wind: ${response.data.wind.speed}km/h`;
+
+  // use another api for displaying future weather conditions
+
+  let apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&appid=${apiKey}`;
+  axios.get(apiUrl2).then(displayFutureWeatherCondition);
 }
 
 function searchCity(city) {
-  let apiKey = "2df674138d044db88c1ab34f314bc364";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeatherCondition);
 }
