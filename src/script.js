@@ -22,11 +22,13 @@ function formatDate(date) {
 
   return `${day} ${hours}:${minutes}`;
 }
+
 //homework 5
 let apiKey = "2df674138d044db88c1ab34f314bc364";
 
 function displayFutureWeatherCondition(response) {
   console.log(response.data);
+
   document.querySelector("#days").innerHTML = `
         <div class="col day">${response.data.list[3].dt_txt}</div>
         <div class="col day">${response.data.list[11].dt_txt}</div>
@@ -36,10 +38,10 @@ function displayFutureWeatherCondition(response) {
   `;
   document.querySelector("#temperatures").innerHTML = `
         <div class="col temperature">${response.data.list[3].main.temp_max}K/${response.data.list[3].main.temp_min}K</div>
-        <div class="col temperature">9°C / 1°C</div>
-        <div class="col temperature">10°C / 3°C</div>
-        <div class="col temperature">13°C / 3°C</div>
-        <div class="col temperature">15°C / 7°C</div>
+        <div class="col temperature">${response.data.list[11].main.temp_max}K/${response.data.list[11].main.temp_min}K</div>
+        <div class="col temperature">${response.data.list[19].main.temp_max}K/${response.data.list[19].main.temp_min}K</div>
+        <div class="col temperature">${response.data.list[27].main.temp_max}K/${response.data.list[27].main.temp_min}K</div>
+        <div class="col temperature">${response.data.list[35].main.temp_max}K/${response.data.list[35].main.temp_min}K</div>
         <div class="col temperature">11°C / 8°C</div>
   `;
 }
