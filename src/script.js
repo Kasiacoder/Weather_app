@@ -1,3 +1,5 @@
+const apiKey = "2df674138d044db88c1ab34f314bc364";
+const baseUrl = "https://api.openweathermap.org/data/2.5";
 function formatDate(date) {
   let hours = date.getHours();
   if (hours < 10) {
@@ -32,26 +34,25 @@ function formatDay(timestamp) {
 }
 
 //homework 5
-let apiKey = "2df674138d044db88c1ab34f314bc364";
 
 function displayFutureWeatherCondition(response) {
   console.log(response.data);
 
   document.querySelector("#days").innerHTML = `
-        <div class="col day">${response.data.list[3].dt_txt}</div>
+        <div class="col day">${formatDate(days.dt)}</div>
         <div class="col day">${response.data.list[11].dt_txt}</div>
         <div class="col day">${response.data.list[19].dt_txt}</div>
         <div class="col day">${response.data.list[27].dt_txt}</div>
         <div class="col day">${response.data.list[35].dt_txt}</div>
   `;
-  document.querySelector("#temperatures").innerHTML = `
-        <div class="col temperature">${response.data.list[3].main.temp_max}K/${response.data.list[3].main.temp_min}K</div>
-        <div class="col temperature">${response.data.list[11].main.temp_max}K/${response.data.list[11].main.temp_min}K</div>
-        <div class="col temperature">${response.data.list[19].main.temp_max}K/${response.data.list[19].main.temp_min}K</div>
-        <div class="col temperature">${response.data.list[27].main.temp_max}K/${response.data.list[27].main.temp_min}K</div>
-        <div class="col temperature">${response.data.list[35].main.temp_max}K/${response.data.list[35].main.temp_min}K</div>
-        <div class="col temperature">11°C / 8°C</div>
-  `;
+  //  document.querySelector("#temperatures").innerHTML = `
+  //       <div class="col temperature">${response.data.list[3].main.temp_max}K/${response.data.list[3].main.temp_min}K</div>
+  //       <div class="col temperature">${response.data.list[11].main.temp_max}K/${response.data.list[11].main.temp_min}K</div>
+  //       <div class="col temperature">${response.data.list[19].main.temp_max}K/${response.data.list[19].main.temp_min}K</div>
+  //       <div class="col temperature">${response.data.list[27].main.temp_max}K/${response.data.list[27].main.temp_min}K</div>
+  //       <div class="col temperature">${response.data.list[35].main.temp_max}K/${response.data.list[35].main.temp_min}K</div>
+  //       <div class="col temperature">11°C / 8°C</div>
+  // `;
 }
 
 function displayWeatherCondition(response) {
@@ -60,7 +61,6 @@ function displayWeatherCondition(response) {
     response.data.main.temp
   )}°C`;
 
-  document.querySelector("#city-element").innerHTML = response.data.name;
   document.querySelector(
     "#humidity"
   ).innerHTML = `Humidity: ${response.data.main.humidity}%`;
@@ -69,13 +69,49 @@ function displayWeatherCondition(response) {
   ).innerHTML = `Wind: ${response.data.wind.speed}km/h`;
 
   // use another api for displaying future weather conditions
+  searchWeatherForecast(response.data.coord.lat, response.data.coord.lon);
+}
 
-  let apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&appid=${apiKey}`;
-  axios.get(apiUrl2).then(displayFutureWeatherCondition);
+function searchWeatherForecast(latitude, longitude) {
+  let oneCallWeatherUrl = `${baseUrl}/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}
+&units=metric`;
+  axios.get(oneCallWeatherUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  const daysElement = document.querySelector("#days");
+  let forecastHtml = `<div class='row'>`;
+  let forecastDays = response.data.daily;
+
+  forecastDays.shift();
+  forecastDays.pop();
+  console.log(forecastDays);
+
+  response.data.daily.forEach((day, index) => {
+    forecastHtml =
+      forecastHtml +
+      `
+      <div class = "col-2">
+    <div class = "dayName">${formatDay(day.dt)}</div>
+    <div class = "dayTemperature">${Math.round(day.temp.day)}°C/${Math.round(
+        day.temp.night
+      )}°C</div>
+    <div class = "dayIcon">
+      <img
+          src="https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"
+          alt=""
+          width="42"
+        />
+</div>
+</div>
+    `;
+  });
+
+  document.querySelector("#days").innerHTML = forecastHtml;
 }
 
 function searchCity(city) {
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiUrl = `${baseUrl}/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeatherCondition);
 }
 

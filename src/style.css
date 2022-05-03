@@ -89,6 +89,10 @@ div {
   color: #fda403;
   font-size: 40px;
 }
+
+.dayName {
+  color: #fda403;
+}
 .temp {
   padding-left: 30px;
   display: flex;
