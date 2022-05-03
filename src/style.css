@@ -92,7 +92,15 @@ div {
 
 .dayName {
   color: #fda403;
+  font-size: 28px;
 }
+
+.dayTemperature {
+  color: #fda403;
+  font-weight: 800;
+  font-size: 23px;
+}
+
 .temp {
   padding-left: 30px;
   display: flex;
@@ -114,4 +122,5 @@ ul {
 .footer {
   text-align: center;
   display: block;
+  margin-top: 60px;
 }

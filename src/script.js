@@ -100,7 +100,7 @@ function displayForecast(response) {
       <img
           src="https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"
           alt=""
-          width="42"
+          width="48"
         />
 </div>
 </div>
